@@ -99,14 +99,14 @@ A transaction re-executes a query returning a set of rows that satisfy a search 
 
 ### 6) What is the purpose of indexing the database? How do indices operate? Give some examples of guidance rules of indexing.
 
- 1 -> 26
- 2 -> 23
- 3 -> 1
- 4 -> 25
+ 1 -> 26  
+ 2 -> 23  
+ 3 -> 1  
+ 4 -> 25  
  5 -> 21
 
 ### 7) How to ensure high quality of database model and validate a database? Name some validation techniques. Give examples of validation against user transactions?
-
+You set restrictions on your data (type etc.) then validate by creating a user transaction and validating only valid data can be inserted.  
 Data analysis  
 Søndag
 
@@ -179,8 +179,8 @@ If you are working with big data, this one is made for you. (Statistics with big
 
 ### 13) What is called relational data model? Which are the model’s components? What is the difference between relation and relationship? Which are the properties of a relationship?  
 
-ER-diagram
-Relation == Table
+ER-diagram  
+Relation == Table  
 Relationship == How two or more relations are connected (Many-to-Many, One-to-Many, One-to-One)
 
 ### 14) Which mathematical theory stays behind the relational data models? Which theoretical terms are used for describing the model and its components?
@@ -189,11 +189,10 @@ Relationship == How two or more relations are connected (Many-to-Many, One-to-Ma
 - Rows - An object comprised of a set of column values, sometimes called a _tuple_
 - Tables - A set of rows with the same columns, sometimes called a _relation_
 
-Søndag [måske noget info her](https://piazza.com/class_profile/get_resource/j74smf7qnr1x8/j7kquucg4ih4av)
+[måske noget info her](https://piazza.com/class_profile/get_resource/j74smf7qnr1x8/j7kquucg4ih4av)
 
 ### 15) What is called relational algebra? How is it related to database development? Which relational operations can be performed in a database? Name some unary and binary operations.
 
-Søndag
 relational operators:
 * \>
 * <
@@ -224,13 +223,13 @@ Low coupling (if can be used multipe places) (refactoring)
 
 ### 17) Which are the stages of database development methodology? Which are their objectives, tasks, tools and techniques? At which stage are the database requirements specified? Which tasks are solved at the design stage? Which are the three design layers? How do they differ?
 
-Analysis -> Conceptual database design -> requirements specified
-Logical Design
-Implementation -> physical design?
-Realizing the Design -> creation of the DB
+Analysis -> Conceptual database design -> requirements specified  
+Logical Design  
+Implementation -> physical design?  
+Realizing the Design -> creation of the DB  
 Populating the Database
 
-the three design layers:  
+the three design layers:
 * conceptual
 * logical
 * physical
@@ -294,6 +293,13 @@ Normalization is used for mainly two purposes:
 * EKNF - Every non-trivial functional dependency involves either a superkey or an elementary key's subkey
 * BCNF - No redundancy from any functional dependency
 
+For each relation:  
+Every non-key attribute  
+depends on the key (1st normal form)  
+the whole key (2nd normal form)  
+and nothing but the key (3rd normal form)  
+so help me Codd.
+
 You could denormalize tables where you normally would have to do a lot of joins, because you often would need to use the data together. This way your queries would be faster at the cost of data redundancy.
 
 ### 21) What is referential integrity and why is it important? Give examples of methods for supporting the referential integrity.
@@ -311,7 +317,6 @@ When creating indexes you can create them concurrently to avoid locks for large 
 
 ### 23) Which data is called derived data? What is called database view? What are the advantages and limitations of using views? Name one advantage of view parametrisation. Name one disadvantage of view materialization.
 
-Søndag (parameterisation)
 [ref](http://www.advancesharp.com/blog/1104/parameterized-view-in-sql-server-with-example)
 derived data -> INGEN DATA OM DATA I BASEN  
 **Views:**  
@@ -560,7 +565,10 @@ MongoDB is a CP-database and uses *shards* to ensure high availability.
 
 #### 46) Can MongoDB be used as a file system? Can MongoDB run over single servers only?
 
-Yes to both
+Yes FS no to other
+
+![](https://i.imgur.com/GsjK6c6.png)
+
 
 MongoDB can run over multiple servers, balancing the load and/or duplicating data to keep the system up and running in case of hardware failure.
 
@@ -758,11 +766,14 @@ https://neo4j.com/developer/graph-platform/
 
 Neo4j provides a REST API which you can call cypher commands via. the REST protocols.  
 You can connect via. HTTP, HTTPS, BOLT.
-[source](https://hackmd.io/DIcqpBcWQzOpMqNWQHfP3A?both)
+[source](https://hackmd.io/DIcqpBcWQzOpMqNWQHfP3A?both) FIX LINK
 
 #### 64) How does Neo4j respond to ACID and CAP? How does clustering relate to ACID and CAP features? Which cluster architectures are available for Neo4j?
 
-Søndag
+CA (Not partition tolerant?) (AP if you ask book)
+
+![](https://i.imgur.com/ZD5C3iz.png)
+
 
 [Neo4j is fully ACID-compliant](https://www.graphgrid.com/neo4j-is-designed-to-be-your-source-of-truth-database/#:~:text=But%20it's%20a%20fact%3A%20Neo4j,truth%20database%20for%20your%20enterprise.&text=Neo4j%20ensures%20that%20operations%20involving,transaction%20to%20guarantee%20consistent%20data.)  
 
@@ -803,14 +814,11 @@ An unclean shutdown does not directly inform the cluster that a Core Server has 
 
 If the leaver was playing the Leader role, there will be a brief election to produce a new Leader. Once the new Leader is established, the Core cluster continues albeit with less redundancy. However even with this failure, a Core cluster of 5 servers reduced to 4 can still tolerate one more fault before becoming read-only.
 
-søndag
-
 #### 66) Which query language is used for processing the graph data? Which are the objects It operates with?
-
-Søndag
 Cypher
 
-Nodes/relationships
+Nodes/relationships  
+DB management (Creating indexes, users etc.)
 
 #### 67) Which categories of graph algorithms are enabled in Neo4j? What is their implementation? Give some examples of algorithms in each category. Give some examples of business cases, which benefit from the implementation of graph algorithms.
 
@@ -904,7 +912,7 @@ The replication feature uses master-slave replication. It allows replica Redis i
 
 #### 72. Does Redis give speed and durability both?
 
-No. 
+No.  
     Redis does support durability with Snapshots, and Append-Only File.  
     Append-Only File: Every shard of a Redis database appends new lines to its persistent file either every second(fast but less safe as you can lose a second worth of data) or every write (safer but slower).  
     AOF is safe from corruption since it is append only, and if a line is half written, they have a tool that can reasily fix it (redis-check-aof).  
@@ -920,7 +928,8 @@ You can combine AOF and Snapshots in the same instance. When Redis restarts the 
 
 #### 74. Mention what are the things you have to take care while using Redis?
 
-søndag
+Storage is limited.  
+RAM is volatile, so you can consider setting up an AOF (append only file or a snapshot)
 
 #### 75. What are the strengths and weaknesses of Redis? When is Redis the best choice of database type and when it should be avoided? Name some typical use cases and applications.
 
